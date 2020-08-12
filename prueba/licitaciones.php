@@ -15,8 +15,14 @@ if(isset($_REQUEST['submit_btn']))
         }
     }else{
         $date=date("dmY"); 
-        $fileip = file_get_contents("http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json?fecha=$date&ticket=83D4D082-755A-41DC-8B28-1DDA010F765E");
-        $data=json_decode($fileip);        
+        $url = "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json?ticket=83D4D082-755A-41DC-8B28-1DDA010F765E";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        $data=json_decode($result);  
     }
 ?>
 <style>
