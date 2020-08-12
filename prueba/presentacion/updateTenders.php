@@ -2,12 +2,13 @@
 
 
         //Conexion a la base de datos
-        $server = "localhost";
-        $user = "root";
-        $pass = "12345678";
+        $server = "remotemysql.com";
+        $user = "6la5b2l945";
+        $pass = "zppS1PyDVy";
 
-        $bd = "licitaciones";
+        $bd = "6la5b2l945";
         $port = "3306";
+    
         $conexion = mysqli_connect($server, $user, $pass,$bd,$port) 
         or die("Ha sucedido un error inesperado en la conexion de la base de datos");
         $conexion->set_charset("utf8");
@@ -37,11 +38,11 @@
                 } else {
                     foreach ($data->Listado as $idx2 => $listado2) {
               
-                        $compra = mysqli_query($conexion, "SELECT * FROM COMPRADOR WHERE cod_comprador=".$listado2->Comprador->CodigoUsuario);
+                        $compra = mysqli_query($conexion, "SELECT * FROM comprador WHERE cod_comprador=".$listado2->Comprador->CodigoUsuario);
               
                         if (mysqli_num_rows($compra) == 0) {
               
-                            $sql = "INSERT INTO COMPRADOR (cod_comprador,nom_comprador,cod_organismo,nom_organismo) VALUES (".$listado2->Comprador->CodigoUsuario.",'".$listado2->Comprador->NombreUsuario."', ".$listado2->Comprador->CodigoOrganismo.", '".$listado2->Comprador->NombreOrganismo."')";
+                            $sql = "INSERT INTO comprador (cod_comprador,nom_comprador,cod_organismo,nom_organismo) VALUES (".$listado2->Comprador->CodigoUsuario.",'".$listado2->Comprador->NombreUsuario."', ".$listado2->Comprador->CodigoOrganismo.", '".$listado2->Comprador->NombreOrganismo."')";
                             $insert = mysqli_query($conexion, $sql);
                        
                             if ($insert) {
@@ -52,15 +53,15 @@
                             }
                         }
               
-                        $lic = mysqli_query($conexion, "SELECT * FROM LICITACION WHERE cod_licitacion='$listado2->CodigoExterno'");
+                        $lic = mysqli_query($conexion, "SELECT * FROM licitacion WHERE cod_licitacion='$listado2->CodigoExterno'");
               
                         if (mysqli_num_rows($lic) == 0) {
               
                             echo '<br>';
                             $fecha =$listado2->Fechas->FechaCierre;
-                            $sql = "INSERT INTO LICITACION (cod_licitacion,nom_licitacion,cod_comprador, fecha_cierre,pais,categoria,descripcion) VALUES ('$listado2->CodigoExterno','$listado2->Nombre',".$listado2->Comprador->CodigoUsuario.", '$fecha', 'Chile','N/A','$listado2->Descripcion')";
+                            $sql = "INSERT INTO licitacion (cod_licitacion,nom_licitacion,cod_comprador, fecha_cierre,pais,cod_categoria,descripcion) VALUES ('$listado2->CodigoExterno','$listado2->Nombre',".$listado2->Comprador->CodigoUsuario.", '$fecha', 'Chile',1,'$listado2->Descripcion')";
                             $insert = mysqli_query($conexion, $sql);
-                            $sql2 = "INSERT INTO LISTADO (cod_licitacion,cantidad) VALUES ('$listado2->CodigoExterno',".$listado2->Items->Cantidad.")";
+                            $sql2 = "INSERT INTO listado (cod_licitacion,cantidad) VALUES ('$listado2->CodigoExterno',".$listado2->Items->Cantidad.")";
                             $insert2 = mysqli_query($conexion, $sql2);
                    
                             if ($insert) {
@@ -74,7 +75,7 @@
                            //     $insert = mysqli_query($conexion, $sql);
                         }
                        
-                        $lis = mysqli_query($conexion, "SELECT * FROM LISTADO WHERE cod_licitacion='$listado2->CodigoExterno'");
+                        $lis = mysqli_query($conexion, "SELECT * FROM listado WHERE cod_licitacion='$listado2->CodigoExterno'");
                  
                         if (mysqli_num_rows($lis) == 1) {
                             $row = mysqli_fetch_array($lis);
@@ -85,10 +86,10 @@
                        
                                     foreach ($listado3->Listado as $key => $value) {
                        
-                                        $sql = "INSERT INTO DETALLE_LISTADO (cod_listado,cod_producto,cantidad)
+                                        $sql = "INSERT INTO detalle_listado (cod_listado,cod_producto,cantidad)
                                                 VALUES (".$row['cod_listado'].",$value->CodigoProducto,".$value->Cantidad.")";
                                         $insert = mysqli_query($conexion, $sql);
-                                        $sql2 = "INSERT INTO PRODUCTO (cod_producto,nom_producto,cod_categoria) 
+                                        $sql2 = "INSERT INTO producto (cod_producto,nom_producto,cod_categoria) 
                                                  VALUES ($value->CodigoProducto,'$value->NombreProducto',$value->CodigoCategoria)";
                                         $insert2 = mysqli_query($conexion, $sql2);
                        

@@ -50,7 +50,7 @@ class LicitacionDAO implements DAO
 	 */
 	public function crear ($licitacionNuevo){
 		// orden de insercion cedula, nombre, email, contaseña, tarjeta, estado, puntos, intentos
-		$sentencia="INSERT INTO LICITACION 
+		$sentencia="INSERT INTO licitacion 
 		VALUES('".$licitacionNuevo->getCodLicitacion()."','".$licitacionNuevo->getNomLicitacion()."',".$licitacionNuevo->getCodComprador().",'".$licitacionNuevo->getFechaCierre()."','".$licitacionNuevo->getCategoria()."','".$licitacionNuevo->getDescripcion()."')";
 		mysqli_query($this->conexion, $sentencia);
 
@@ -62,7 +62,7 @@ class LicitacionDAO implements DAO
 	 * @return [licitacion]         licitacion encontrado
 	 */
 	public function consultar($codigo){
-		$sentencia="SELECT * FROM LICITACION WHERE cod_licitacion='".$codigo."'";
+		$sentencia="SELECT * FROM licitacion WHERE cod_licitacion='".$codigo."'";
 		if(!$result=mysqli_query($this->conexion,$sentencia))die();
 			$row=mysqli_fetch_array($result);
 			$licitacion=new Licitacion();
@@ -84,7 +84,7 @@ class LicitacionDAO implements DAO
 	 * @return [licitaciones]
 	 */
 	public function listarTodo(){
-		$sentencia="SELECT * FROM LICITACION";
+		$sentencia="SELECT * FROM licitacion";
 		if(!$result = mysqli_query($this->conexion, $sentencia)) die();
 		$licitacions = array();
 
