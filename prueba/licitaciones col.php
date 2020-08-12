@@ -90,7 +90,7 @@ $lici= ManejoLicitacion::listarLicitacions();
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default modalClos" data-dismiss="modal">Close</button>
       </div>
     </div>
     
@@ -104,6 +104,16 @@ $(function(){
     var dataURL = $(this).attr('data-href');
     mymodal.find('.modal-title').text('Detalles de la licitación');
     mymodal.find('.modal-body').load(dataURL);
+    mymodal.modal('show');
+
+  });
+})
+$(function(){
+  $('.modalClos').click(function(e){
+    e.preventDefault();
+    var mymodal = $('#myModal');
+    mymodal.find('.modal-title').text('Detalles de la licitación');
+    mymodal.find('.modal-body').text("Cargando...");
     mymodal.modal('show');
 
   });
