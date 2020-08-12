@@ -17,15 +17,15 @@ $lici= ManejoLicitacion::listarLicitacions();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Licitaciones</title>
   
-    <link rel="stylesheet" type="text/css" href="presentacion/datatable/jquery.dataTables.min.css"/>
-    <script src="presentacion/datatable/jquery-3.5.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="prueba/presentacion/datatable/jquery.dataTables.min.css"/>
+    <script src="prueba/presentacion/datatable/jquery-3.5.1.js"></script>
     <script src="presentacion/datatable/jquery.dataTables.min.js"></script>
 
-    <link rel="stylesheet" href="presentacion/css/bootstrap.min.js">
+    <link rel="stylesheet" href="prueba/presentacion/css/bootstrap.min.js">
     <link rel="stylesheet" href="presentacion/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="presentacion/css/bootstrapmodal.min.css">
-    <script src="presentacion/css/bootstrapmodal.min.js"></script>
+    <link rel="stylesheet" href="prueba/presentacion/css/bootstrapmodal.min.css">
+    <script src="prueba/presentacion/css/bootstrapmodal.min.js"></script>
   
 </head>
 <body>
@@ -56,7 +56,7 @@ $lici= ManejoLicitacion::listarLicitacions();
                     <td><center>'.$l->getNomLicitacion().'</center></td>
                     <td><center>'.$l->getFechaCierre().'</center></td>
                     <td><center>'.$l->getPais().'</center></td>
-                    <td><center><a  href="" data-href="presentacion/detalle.php?cod='.$l->getCodLicitacion().'&pais='.$l->getPais().'" class="modalShow" >Ver Detalles</a></center></td>									
+                    <td><center><a  href="" data-href="prueba/presentacion/detalle.php?cod='.$l->getCodLicitacion().'&pais='.$l->getPais().'" class="modalShow" >Ver Detalles</a></center></td>									
                 </tr>';
         
         }
