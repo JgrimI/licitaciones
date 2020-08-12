@@ -2,11 +2,13 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"].'/prueba/persistencia/util/Conexion.php';
 require_once $_SERVER["DOCUMENT_ROOT"].'/prueba/negocio/ManejoLicitacion.php';
+require_once $_SERVER["DOCUMENT_ROOT"].'/prueba/negocio/ManejoCategoria.php';
 $obj=new Conexion();
 $conexion=$obj->conectarBD();
 
 ManejoLicitacion::setConexionBD($conexion);
 $lici= ManejoLicitacion::listarLicitacions();
+ManejoCategoria::setConexionBD($conexion);
 
 ?>
 <html>
@@ -49,9 +51,11 @@ $lici= ManejoLicitacion::listarLicitacions();
     }else{
         $salida ="";    
         foreach($lici as $l){
+            
+        $categoria= ManejoCategoria::buscarCategoria($l->getCategoria());
             echo '
                 <tr>
-                    <td style="display: none;">'.$l->getCategoria().'</td>
+                    <td style="display: none;">'.$categoria->getNomCategoria().'</td>
                     <td><center>'.$l->getCodLicitacion().'</center></td>
                     <td><center>'.$l->getNomLicitacion().'</center></td>
                     <td><center>'.$l->getFechaCierre().'</center></td>
@@ -74,7 +78,6 @@ $lici= ManejoLicitacion::listarLicitacions();
         ?>
 
 </table>
-<a  href="" target="_blank" data-toggle="modal" data-target="#myModal">Ver Detalles</a>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
