@@ -118,6 +118,16 @@ $(function(){
 
   });
 })
+$(function(){
+  $('.close').click(function(e){
+    e.preventDefault();
+    var mymodal = $('#myModal');
+    mymodal.find('.modal-title').text('Detalles de la licitación');
+    mymodal.find('.modal-body').text("Cargando...");
+    mymodal.modal('show');
+
+  });
+})
 $(document).ready(function() {
     $('#example').DataTable({
         initComplete: function() {
