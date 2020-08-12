@@ -95,7 +95,7 @@ class LicitacionDAO implements DAO
 			$licitacion->setCodComprador($row["cod_comprador"]);
 			$licitacion->setFechaCierre($row["fecha_cierre"]);
 			$licitacion->setPais($row["pais"]);
-			$licitacion->setCategoria($row["categoria"]);
+			$licitacion->setCategoria($row["cod_categoria"]);
 			$licitacion->setDescripcion($row["descripcion"]);
 			array_push($licitacions,$licitacion);
 		}

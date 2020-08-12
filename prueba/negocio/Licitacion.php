@@ -48,7 +48,7 @@ private $descripcion;
  * @param [integer]cod_comprador : Código de la comprador de la licitacion
  * @param [datetime]fecha_cierre : Código de la tipo de la licitacion
  * @param [String]pais : Pais de la licitacion
- * @param [String]categoria : Categoria de la licitacion
+ * @param [Integer]categoria : Categoria de la licitacion
  * @param [String]descripcion : Descripcion de la licitacion
  */
 
