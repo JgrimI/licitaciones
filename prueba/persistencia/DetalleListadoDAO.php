@@ -2,12 +2,13 @@
 /**
  * Archivo de conexión a la base de datos
  */
-require_once('../persistencia/util/Conexion.php');
+require_once $_SERVER["DOCUMENT_ROOT"].'/prueba/persistencia/util/Conexion.php';
 
 /**
  * Archivo de entidad
  */
-require_once('../negocio/DetalleListado.php');
+
+require_once $_SERVER["DOCUMENT_ROOT"].'/prueba/negocio/DetalleListado.php';
 
 /**
  * Interfaz DAO
@@ -48,7 +49,7 @@ class DetalleListadoDAO implements DAO
 	 * @return [detallelistado]         detallelistado encontrado
 	 */
 	public function consultar($codigo){
-		$sentencia="SELECT * FROM COMPRADOR WHERE cod_detallelistado=".$codigo;
+		$sentencia="SELECT * FROM  WHERE cod_detallelistado=".$codigo;
 		if(!$result=mysqli_query($this->conexion,$sentencia))die();
 			$row=mysqli_fetch_array($result);
 			$detallelistado=new DetalleListado();
@@ -64,7 +65,7 @@ class DetalleListadoDAO implements DAO
 	 * @return [detallelistadoes]
 	 */
 	public function listarTodo(){
-		$sentencia="SELECT * FROM COMPRADOR";
+		$sentencia="SELECT * FROM comprador";
 		if(!$result = mysqli_query($this->conexion, $sentencia)) die();
 		$detallelistados = array();
 

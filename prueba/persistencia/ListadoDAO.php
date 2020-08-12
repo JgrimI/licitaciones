@@ -2,13 +2,12 @@
 /**
  * Archivo de conexión a la base de datos
  */
-require_once('../persistencia/util/Conexion.php');
+require_once ($_SERVER["DOCUMENT_ROOT"]).'/prueba/persistencia/util/Conexion.php';
 
 /**
  * Archivo de entidad
  */
-require_once('../negocio/Listado.php');
-
+require_once ($_SERVER["DOCUMENT_ROOT"]).'/prueba/negocio/Listado.php';
 /**
  * Interfaz DAO
  */
@@ -48,7 +47,7 @@ class ListadoDAO implements DAO
 	 * @return [listado] listado encontrado
 	 */
 	public function consultar($codigo){
-		$sentencia="SELECT * FROM LISTADO WHERE cod_licitacion='".$codigo."'";
+		$sentencia="SELECT * FROM listado WHERE cod_licitacion='".$codigo."'";
 		if(!$result=mysqli_query($this->conexion,$sentencia))die();
 			$row=mysqli_fetch_array($result);
 			$listado=new Listado();
@@ -80,7 +79,7 @@ class ListadoDAO implements DAO
 	 * @return [listadoes]
 	 */
 	public function listarTodo(){
-		$sentencia="SELECT * FROM LISTADO";
+		$sentencia="SELECT * FROM listado";
 		if(!$result = mysqli_query($this->conexion, $sentencia)) die();
 		$listadoes = array();
 

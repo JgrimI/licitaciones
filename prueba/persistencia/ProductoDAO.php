@@ -2,12 +2,12 @@
 /**
  * Archivo de conexión a la base de datos
  */
-require_once('../persistencia/util/Conexion.php');
-
+require_once ($_SERVER["DOCUMENT_ROOT"]).'/prueba/persistencia/util/Conexion.php';
 /**
  * Archivo de entidad
  */
-require_once('../negocio/Comprador.php');
+
+require_once ($_SERVER["DOCUMENT_ROOT"]).'/prueba/negocio/Comprador.php';
 
 /**
  * Interfaz DAO

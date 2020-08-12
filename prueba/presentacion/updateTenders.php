@@ -18,7 +18,7 @@
         $json = file_get_contents("http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json?ticket=83D4D082-755A-41DC-8B28-1DDA010F765E");
         $data=json_decode($json);
         foreach ($data->Listado as $idx => $listado) {
-            $lic = mysqli_query($conexion, "SELECT * FROM LICITACION WHERE cod_licitacion='$listado->CodigoExterno'");
+            $lic = mysqli_query($conexion, "SELECT * FROM licitacion WHERE cod_licitacion='$listado->CodigoExterno'");
             if (mysqli_num_rows($lic) == 0) {
                 sleep(2);
                 $url="http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json?codigo=$listado->CodigoExterno&ticket=83D4D082-755A-41DC-8B28-1DDA010F765E";
