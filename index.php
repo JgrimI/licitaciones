@@ -17,15 +17,15 @@ $lici= ManejoLicitacion::listarLicitacions();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Licitaciones</title>
   
-    <link rel="stylesheet" type="text/css" href="prueba/presentacion/datatable/jquery.dataTables.min.css"/>
-    <script src="prueba/presentacion/datatable/jquery-3.5.1.js"></script>
-    <script src="presentacion/datatable/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/prueba/presentacion/datatable/jquery.dataTables.min.css"/>
+    <script  type="application/javascript" src="/prueba/presentacion/datatable/jquery-3.5.1.js"></script>
+    <script   type="application/javascript"src="/prueba/presentacion/datatable/jquery.dataTables.min.js"></script>
 
-    <link rel="stylesheet" href="prueba/presentacion/css/bootstrap.min.js">
-    <link rel="stylesheet" href="presentacion/css/bootstrap.min.css">
+    <link rel="stylesheet"  type="application/javascript" href="/prueba/presentacion/css/bootstrap.min.js">
+    <link rel="stylesheet" href="/prueba/presentacion/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="prueba/presentacion/css/bootstrapmodal.min.css">
-    <script src="prueba/presentacion/css/bootstrapmodal.min.js"></script>
+    <link rel="stylesheet" href="/prueba/presentacion/css/bootstrapmodal.min.css">
+    <script  type="application/javascript" src="/prueba/presentacion/css/bootstrapmodal.min.js"></script>
   
 </head>
 <body>
@@ -87,7 +87,7 @@ $lici= ManejoLicitacion::listarLicitacions();
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-
+        Cargando...
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default modalClos" data-dismiss="modal">Close</button>
