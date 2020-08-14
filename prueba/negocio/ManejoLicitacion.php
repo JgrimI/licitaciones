@@ -51,6 +51,24 @@
             $licitacions=$licitacionDAO->listarTodo();
             return $licitacions;
         }
+         /**
+         * Lista todos los licitacions  
+         * @return Licitacion[] Lista de todos los licitacions de la base de datos
+         */
+        public  static function listarPorNombreDado($nombre){
+            $licitacionDAO=LicitacionDAO::obtenerLicitacionDAO(self::$conexionBD);
+            $licitacions=$licitacionDAO->listarLicitacionesPorNombreDado($nombre);
+            return $licitacions;
+        }
+         /**
+         * Lista todos los licitacions  
+         * @return Licitacion[] Lista de todos los licitacions de la base de datos
+         */
+        public  static function listarPorCategoriaDada($codigo){
+            $licitacionDAO=LicitacionDAO::obtenerLicitacionDAO(self::$conexionBD);
+            $licitacions=$licitacionDAO->listarLicitacionesPorCategoriaDada($codigo);
+            return $licitacions;
+        }
     
     /**
      * Cambia la conexión 

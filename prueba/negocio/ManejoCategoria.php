@@ -50,7 +50,16 @@
             $categoriaDAO=CategoriaDAO::obtenerCategoriaDAO(self::$conexionBD);
             $categorias=$categoriaDAO->listarTodo();
             return $categorias;
-        }  
+        } 
+          /**
+        * Lista todos los categorias  
+        * @return Categoria[] Lista de todos los categorias de la base de datos
+        */
+       public  static function listarCategoriasPorLicitacion(){
+           $categoriaDAO=CategoriaDAO::obtenerCategoriaDAO(self::$conexionBD);
+           $categorias=$categoriaDAO->listarCategoriasPorLictaciones();
+           return $categorias;
+       }  
        
     /**
      * Cambia la conexión 

@@ -49,12 +49,11 @@ class CompradorDAO implements DAO
 	 * @return [comprador]         comprador encontrado
 	 */
 	public function consultar($codigo){
-		$sentencia="SELECT * FROM comprador WHERE cod_comprador=".$codigo;
+		$sentencia="SELECT * FROM comprador WHERE cod_comprador='$codigo'";
 		if(!$result=mysqli_query($this->conexion,$sentencia))die();
 			$row=mysqli_fetch_array($result);
 			$comprador=new Comprador();
 			$comprador->setNomComprador($row["nom_comprador"]);
-			$comprador->setCodOrganismo($row["cod_organismo"]);
 			$comprador->setNomOrganismo($row["nom_organismo"]);
 			return $comprador;
 
@@ -74,7 +73,6 @@ class CompradorDAO implements DAO
 
 			$comprador->setCodComprador($row["cod_comprador"]);
 			$comprador->setNomComprador($row["nom_comprador"]);
-			$comprador->setCodOrganismo($row["cod_organismo"]);
 			$comprador->setNomOrganismo($row["nom_organismo"]);
 
 

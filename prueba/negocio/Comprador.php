@@ -17,10 +17,6 @@ Representa el nombre de la comprador
 */
 private $nom_comprador;
 /*
-Representa el código de identificaicon de la comprador de la comprador
-*/
-private $cod_organismo;
-/*
 Representa el código de identificacion de la tipo de comprador
 */
 private $nom_organismo;
@@ -34,8 +30,7 @@ private $nom_organismo;
 /**
  * @param [String]cod_comprador : Código de la comprador
  * @param [String]nom_comprador : Nombre de la comprador
- * @param [integer]cod_comprador : Código de la comprador de la comprador
- * @param [datetime]fecha_cierre : Código de la tipo de la comprador
+ * @param [String]nom_organismo : Nombre del organismo del comprador
  */
 
 public function __construct(){
@@ -72,24 +67,6 @@ public function getNomComprador(){
  */
 public function setNomComprador($nom_comprador){
 	$this->nom_comprador=$nom_comprador;
-	return $this;
-}
-
- /**
- * Método para obtener el código del comprador de la comprador
-  * @return [Integer] código del comprador
-  */
-  public function getCodOrganismo(){
-	return 	$this->cod_organismo;
-
-}
-
-/**
- * Método para obtener el código de la comprador de la comprador
- * @param [integer]código del comprador de la comprador
- */
-public function setCodOrganismo($cod_organismo){
-	$this->cod_organismo=$cod_organismo;
 	return $this;
 }
 

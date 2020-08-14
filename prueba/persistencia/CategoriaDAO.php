@@ -80,7 +80,29 @@ class CategoriaDAO implements DAO
 		}
 		return $categoriaes;
 	}
+	/**
+	 * Lista todos los objetos que se están en la tabla de categoria
+	 * @return [categoriaes]
+	 */
+	public function listarCategoriasPorLictaciones(){
+		$sentencia="SELECT DISTINCT nom_categoria,categoria.cod_categoria,keywords_categoria FROM categoria, licitacion WHERE licitacion.cod_categoria = categoria.cod_categoria";
+		if(!$result = mysqli_query($this->conexion, $sentencia)) die();
+		$categorias = array();
 
+		while ($row = mysqli_fetch_array($result)) {
+			$categoria=new Categoria();
+
+			$categoria->setCodCategoria($row["cod_categoria"]);
+			$categoria->setNomCategoria($row["nom_categoria"]);
+
+
+			array_push($categorias,$categoria);
+		}
+		return $categorias;
+	}
+
+	
+	
 	/*
 	*Obtiene el objeto de esta clase
 	*

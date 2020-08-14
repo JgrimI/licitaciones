@@ -1,73 +1,6 @@
-
-AGRICULTURA, GANADERÍA, SILVICULTURA  PESCA
-PRODUCCIÓN AGRÍCOLA, PECUARIA, CAZA  ACTIVIDADES SERVICIOS CONEXAS
-SILVICULTURA  EXTRACCIÓN MADERA
-PESCA  ACUICULTURA
-
-
-
-EXPLOTACIÓN MINAS  CANTERAS
- EXTRACCIÓN CARBÓN PIEDRA LIGNITO
- PETRÓLEO CRUDO GAS NATURAL MINERALES METALÍFEROS
- OTRAS MINAS  CANTERAS
- ACTIVIDADES SERVICIOS APOO A LA EXPLOTACIÓN MINAS  CANTERAS
-
-INDUSTRIAS MANUFACTURERAS
- ELABORACIÓN  ALIMENTICIOS BEBIDAS
- TABACO
-  TEXTILES
- PRENDAS VESTIR
- CUEROS CONEXOS
- PRODUCCIÓN MADERA   MADERA  
- CORCHO EXCEPTO MUEBLES; ARTÍCULOS PAJA  MATERIALES TRENZABLES
- PAPEL  PAPEL
- IMPRESIÓN REPRODUCCIÓN GRABACIONES
- COQUE LA REFINACIÓN PETRÓLEO
- SUSTANCIAS PRODUCTOS QUÍMICOS
-  FARMACÉUTICOS, SUSTANCIAS QUÍMICAS MEDICINALES   BOTÁNICOS USO FARMACÉUTICO
-  CAUCHO  PLÁSTICO
-  MINERALES NO METÁLICOS
- METALES COMUNES
-  DERIVADOS METAL, EXCEPTO MAQUINARIA  EQUIPO
-  INFORMÁTICA,  ELECTRÓNICA  ÓPTICA
- EQUIPO ELÉCTRICO
- MAQUINARIA  EQUIPO NCP
- VEHÍCULOS AUTOMOTORES, REMOLQUES  SEMIRREMOLQUES
- OTROS  TIPOS EQUIPO TRANSPORTE
- MUEBLES
- OTRAS INDUSTRIAS MANUFACTURERAS
- REPARACIÓN E INSTALACIÓN MAQUINARIA  EQUIPO
-
-
-SUMINISTROS ELECTRICIDAD, GAS, VAPOR  AIRE ACONDICIONADO
- SUMINISTROS ELECTRICIDAD, GAS, VAPOR  AIRE ACONDICIONADO
-
-
-SUMINISTRO AGUA, EVACUACIÓN AGUAS RESIDUALES (ALCANTARILLADO); GESTIÓN DESECHOS  ACTIVIDADES SANEAMIENTO
- CAPTACIÓN, TRATAMIENTO  SUMINISTRO AGUA
- EVACUACIÓN AGUAS RESIDUALES (ALCANTARILLADO)
- RECOLECCIÓN, TRATAMIENTO  ELIMINACIÓN DESECHOS; RECICLAJE
- ACTIVIDADES SANEAMIENTO  OTROS SERVICIOS GESTIÓN DESECHOS
-
-
-CONSTRUCCIÓN
- CONSTRUCCIÓN EDIFICIOS
- OBRAS INGENIERÍA CIVIL
- ACTIVIDADES ESPECIALIZADAS CONSTRUCCIÓN
- Demolición
- Construcción carreteras, calles  caminos
-
-COMERCIO AL POR MAOR  AL POR MENOR; REPARACIÓN VEHÍCULOS AUTOMOTORES  MOTOCICLETAS
-
-
-
-
-
-
-
-
-
-
+CO1.BDOS.642130CO1.BDOS.820362
+CO1.BDOS.885901
+CO1.BDOS.1002096
 <?php
       /**
       *categoria cod.. nom.. keywords..
@@ -75,62 +8,81 @@ COMERCIO AL POR MAOR  AL POR MENOR; REPARACIÓN VEHÍCULOS AUTOMOTORES  MOTOCICL
       *guardar array numero keywords halladas
       *mayor numero es categoria */
 
-      
-$url="http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json?codigo=450-97-LE20&ticket=83D4D082-755A-41DC-8B28-1DDA010F765E";
+//      $server = "remotemysql.com";
+  //    $user = "6la5b2l945";
+//      $pass = "zppS1PyDVy";
 
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13");
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$result = curl_exec($ch);
-curl_close($ch);
-$data=json_decode($result);
-$data1=json_decode($result, true);
-
-$detalle=$data->Listado[0]->Descripcion;
-
-
-$keywords='ACTIVIDADES JURÍDICAS ilegal gestion juridica gestiones contrato abogado CONTABLES';
-$keywords = mb_strtolower($keywords, 'UTF-8');
-$detalle = mb_strtolower($detalle, 'UTF-8');
-$keywords = preg_replace('/[0-9\.\,\"\?\¿\!\;\:\#\$\%\&\(\)\*\+\-\/\<\>\=\@\[\]\\\^\_\{\}\|\~]+/', '', $keywords);
-$detalle = preg_replace('/[0-9\.\,\"\?\¿\!\;\:\#\$\%\&\(\)\*\+\-\/\<\>\=\@\[\]\\\^\_\{\}\|\~]+/', '', $detalle);
-$keywords = remove_accents($keywords);
-$detalle = remove_accents($detalle);
-
-similar_text($keywords, $detalle, $porcentaje);
-
-echo $porcentaje;
-$a1=explode(' ',$keywords);
-$a2=explode(' ',$detalle);
-
-function longenough($word){
-   return strlen( $word ) > 2;
-}
-$a1=array_filter($a1,'longenough');
-$a2=array_filter($a2,'longenough');
-
-foreach ($a1 as $busca) {
-    foreach ($a2 as $busca2) {
-        $pos = strpos($busca2, $busca);
+  //    $bd = "6la5b2l945";
+    //  $port = "3306";
   
-        if ($pos === false) {
-        
-        } else {
-            echo "La cadena '$busca' fue encontrada en la ";
-            echo " y existe en la posición $pos <br>";
+$server = "35.184.25.215";
+$user = "prueba";
+$pass = "1234";
+
+$bd = "licitaciones";
+$port = "3306";
+
+      $conexion = mysqli_connect($server, $user, $pass,$bd,$port) 
+      or die("Ha sucedido un error inesperado en la conexion de la base de datos");
+      $conexion->set_charset("utf8");
+  
+
+      $fileip = file_get_contents("https://apiocds.colombiacompra.gov.co:8443/apiCCE2.0/rest/releases/filtersAnd/tender.procurementMethodDetails,Licitaci%C3%B3n%20P%C3%BAblica,tender.status,active");
+      $data=json_decode($fileip);
+      $data2=json_decode($fileip,true);
+
+        $sentencia="SELECT * FROM categoria";
+		if(!$result = mysqli_query($conexion, $sentencia)) die();
+		$categorias = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $categorias[$row["cod_categoria"]]=0;
+            
+            if($data->releases[0]->tender->description){
+
+            }else{
+                $data->releases[0]->tender->description= $data->releases[0]->tender->items[0]->description;
+            }
+            $detalle= $data->releases[0]->tender->description;
+
+
+            $keywords=$row['keywords_categoria'];
+            $keywords = mb_strtolower($keywords, 'UTF-8');
+            $detalle = mb_strtolower($detalle, 'UTF-8');
+            $keywords = preg_replace('/[0-9\.\,\"\?\¿\!\;\:\#\$\%\&\(\)\*\+\-\/\<\>\=\@\[\]\\\^\_\{\}\|\~]+/', '', $keywords);
+            $detalle = preg_replace('/[0-9\.\,\"\?\¿\!\;\:\#\$\%\&\(\)\*\+\-\/\<\>\=\@\[\]\\\^\_\{\}\|\~]+/', '', $detalle);
+            $keywords = remove_accents($keywords);
+            $detalle = remove_accents($detalle);
+
+            $a1=explode(' ',$keywords);
+            $a2=explode(' ',$detalle);
+
+            $a1=array_filter($a1,'longenough');
+            $a2=array_filter($a2,'longenough');
+              foreach ($a1 as $busca) {
+                foreach ($a2 as $busca2) {
+                    $pos = strpos($busca2, $busca);
+            
+                    if ($pos === false) {
+                    
+                    } else {
+                        $categorias[$row["cod_categoria"]] +=1;
+                        echo "La cadena '$busca' fue encontrada en la ";
+                        echo "<br>";
+                    }
+                }
+            }
+            echo $detalle."<br>";
         }
-    }
-}
-$common=array_intersect( $a1, $a2 );
+ 
+        if(max($categorias)==0){
+            echo "oro";
+        }
+$cod_cate= array_keys($categorias,max($categorias));
 
-foreach( $common as $word ){
-   echo $word;
-   echo '<br>';
-   $detalle=preg_replace( "@($word)@i",'<span style="color:red">$1</span>', $detalle );
-}
- echo $detalle;
-
+echo $cod_cate[0];
+function longenough($word){
+    return strlen( $word ) > 2;
+}   
  function remove_accents($string) {
   if ( !preg_match('/[\x80-\xff]/', $string) )
       return $string;

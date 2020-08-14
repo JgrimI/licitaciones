@@ -101,6 +101,51 @@ class LicitacionDAO implements DAO
 		}
 		return $licitacions;
 	}
+	/**
+	 * Lista todos los objetos que se están en la tabla de licitacion
+	 * @return [licitaciones]
+	 */
+	public function listarLicitacionesPorNombreDado($nombre){
+		$sentencia="SELECT * FROM licitacion WHERE nom_licitacion LIKE '%$nombre%'
+		";
+		if(!$result = mysqli_query($this->conexion, $sentencia)) die();
+		$licitacions = array();
+
+		while ($row = mysqli_fetch_array($result)) {
+			$licitacion=new Licitacion();
+			$licitacion->setCodLicitacion($row["cod_licitacion"]);
+			$licitacion->setNomLicitacion($row["nom_licitacion"]);
+			$licitacion->setCodComprador($row["cod_comprador"]);
+			$licitacion->setFechaCierre($row["fecha_cierre"]);
+			$licitacion->setPais($row["pais"]);
+			$licitacion->setCategoria($row["cod_categoria"]);
+			$licitacion->setDescripcion($row["descripcion"]);
+			array_push($licitacions,$licitacion);
+		}
+		return $licitacions;
+	}
+/**
+	 * Lista todos los objetos que se están en la tabla de licitacion
+	 * @return [licitaciones]
+	 */
+	public function listarLicitacionesPorCategoriaDada($codigo){
+		$sentencia="SELECT * FROM licitacion WHERE cod_categoria =$codigo";
+		if(!$result = mysqli_query($this->conexion, $sentencia)) die();
+		$licitacions = array();
+
+		while ($row = mysqli_fetch_array($result)) {
+			$licitacion=new Licitacion();
+			$licitacion->setCodLicitacion($row["cod_licitacion"]);
+			$licitacion->setNomLicitacion($row["nom_licitacion"]);
+			$licitacion->setCodComprador($row["cod_comprador"]);
+			$licitacion->setFechaCierre($row["fecha_cierre"]);
+			$licitacion->setPais($row["pais"]);
+			$licitacion->setCategoria($row["cod_categoria"]);
+			$licitacion->setDescripcion($row["descripcion"]);
+			array_push($licitacions,$licitacion);
+		}
+		return $licitacions;
+	}
 
 	/*
 	*Obtiene el objeto de esta clase

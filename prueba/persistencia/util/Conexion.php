@@ -10,11 +10,11 @@
 		 */
 		public function conectarBD(){
 		
-			$server = "remotemysql.com";
-			$user = "6la5b2l945";
-			$pass = "zppS1PyDVy";
+			$server = "35.184.25.215";
+			$user = "prueba";
+			$pass = "1234";
 
-			$bd = "6la5b2l945";
+			$bd = "licitaciones";
 			$port = "3306";
 			$conexion = mysqli_connect($server, $user, $pass,$bd,$port) 
 			or die("Ha sucedido un error inesperado en la conexion de la base de datos");
